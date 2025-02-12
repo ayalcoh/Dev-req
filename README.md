@@ -67,6 +67,3 @@ Is there anything else you think would be helpful for me to know before starting
 ---
 
 Thank you for your help! This information will help me align my work with your existing practices and get started smoothly. Feel free to provide any additional context or requirements you think would be useful.
-
-Contact Information:
-[Your contact details here]
