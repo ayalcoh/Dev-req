@@ -60,6 +60,28 @@ The LED Matrix Control System is a comprehensive solution enabling users to cont
   - LED Matrix
   - MQTT Client (LightBox Integration)
 
+  #### 2.2 Server Deployment Options
+- **Local Server Mode**
+  - Runs on local network
+  - Direct device communication
+  - Offline capability
+  - Local data storage
+  - Local MQTT broker
+  
+- **Cloud Server Mode**
+  - AWS EC2 hosted
+  - Remote access capability
+  - Data synchronization
+  - Cloud storage backup
+  - Cloud MQTT broker
+  
+- **Hybrid Mode**
+  - Local server primary operation
+  - Cloud server backup
+  - Automatic failover
+  - Data synchronization between modes
+  - Seamless mode switching
+
 ### 3. Core Features
 
 #### 3.1 Mobile Application
@@ -93,6 +115,25 @@ The LED Matrix Control System is a comprehensive solution enabling users to cont
 - Pattern support
 - Scheduled operations
 
+#### 3.4 Sensors and I/O Integration
+- **Input Sensors**
+  - Motion detection sensors
+  - Ambient light sensors
+  - Temperature sensors
+  
+- **Output Controls**
+  - Physical on/off switches
+  - Dimmer switches
+  - Emergency override switches
+  - Smart home wall panels
+  
+- **Third-Party Integrations**
+  - Smart home platforms (Home Assistant, HomeKit, Google Home)
+  - Voice assistants (Alexa, Google Assistant, Siri)
+  - Weather services
+  - IFTTT support
+  - Smart switches (Philips Hue, TP-Link, etc.)
+
 ### 4. Technical Requirements
 
 #### 4.1 Mobile Application
@@ -121,6 +162,28 @@ The LED Matrix Control System is a comprehensive solution enabling users to cont
 - Power management
 - State persistence
 
+#### 4.4 I/O and Integration Requirements
+- **Sensor Communication**
+  - GPIO interface support
+  - I2C/SPI protocol support
+  - Analog input processing
+  - Digital input/output handling
+  - Sensor data sampling rates
+  
+- **Third-Party APIs**
+  - REST API endpoints for integrations
+  - OAuth2 authentication support
+  - Webhook support
+  - Rate limiting
+  - API versioning
+
+- **Local Network Integration**
+  - mDNS support for local discovery
+  - UPnP support
+  - Local API endpoints
+  - Network failover handling
+  - Local device pairing
+  
 ### 5. User Interface
 
 #### 5.1 Mobile Application UI
