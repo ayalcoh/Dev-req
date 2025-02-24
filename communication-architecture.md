@@ -7,6 +7,7 @@
 4. [Control Modes](#4-control-modes)
 5. [Data Flow Paths](#5-data-flow-paths)
 6. [Example Scenarios](#6-example-scenarios)
+7. [Over-The-Air Updates](#7-over-the-air-updates)
 
 ## 1. Mobile App to LED Matrix Flow
 
@@ -154,6 +155,96 @@ Multiple users controlling same LightBox:
 Mobile App 1 ─┐
 Mobile App 2 ─┼→ Server → MQTT → LightBox → LED Matrix
 Mobile App 3 ─┘
+```
+
+## 7. Over-The-Air Updates
+
+### OTA Update Flow
+```
+Mobile App → Server → MQTT → LightBox
+   │                           │
+   └─────── Progress ──────────┘
+```
+
+### Update Process
+1. **Version Check**
+   ```
+   Mobile App → Server: Request latest version
+   Server → Mobile App: Version info + metadata
+   ```
+
+2. **Update Initiation**
+   ```
+   Mobile App → Server: Request update
+   Server → LightBox: Prepare for update
+   LightBox → Server: Ready status
+   ```
+
+3. **Firmware Transfer**
+   ```
+   Server → LightBox: Firmware chunks
+   LightBox → Server: Chunk acknowledgments
+   ```
+
+4. **Verification & Installation**
+   ```
+   LightBox: Verify firmware integrity
+   LightBox: Install new firmware
+   LightBox → Server: Installation status
+   Server → Mobile App: Update complete
+   ```
+
+### OTA Message Formats
+
+#### Version Check Request
+```json
+{
+  "type": "version_check",
+  "lightboxId": "string",
+  "currentVersion": "1.0.0"
+}
+```
+
+#### Update Initiation
+```json
+{
+  "type": "update_request",
+  "lightboxId": "string",
+  "targetVersion": "1.1.0",
+  "size": 1024000,
+  "md5": "string",
+  "timestamp": "ISO-8601"
+}
+```
+
+#### Update Progress
+```json
+{
+  "type": "update_progress",
+  "lightboxId": "string",
+  "progress": 45,
+  "status": "downloading|verifying|installing",
+  "timestamp": "ISO-8601"
+}
+```
+
+### Safety Measures
+- Firmware signature verification
+- Backup of current firmware
+- Rollback capability
+- Progress monitoring
+- Power loss recovery
+- Connection loss handling
+
+### MQTT Topics for OTA
+```
+lightbox/
+├── {lightboxId}/
+    ├── ota/
+        ├── status      # Update status
+        ├── progress    # Update progress
+        ├── control     # Update commands
+        └── data        # Firmware chunks
 ```
 
 ## Communication Protocols
