@@ -2,8 +2,8 @@
 ## Product Requirements Document (PRD)
 
 ### Document Information
-- **Version:** 1.1
-- **Last Updated:** February 23, 2025
+- **Version:** 2.0
+- **Last Updated:** February 24, 2025
 - **Status:** Draft
 
 ### Table of Contents
@@ -20,247 +20,246 @@
 ### 1. Product Overview
 
 #### 1.1 Purpose
-The LED Matrix Control System is a comprehensive solution enabling users to control smart LED matrices through mobile and web interfaces, with support for both local and remote control via WiFi or Bluetooth connections.
+The LED Matrix Control System is a comprehensive solution that enables users to control LED matrices through a mobile application and web dashboard. The system utilizes LightBox controllers as intermediary devices that manage and control the physical LED matrices.
 
 #### 1.2 Target Users
-- **End Users:** Individuals with LED matrix displays
-- **Administrators:** System managers who oversee multiple users and displays
-- **Installers:** Technical staff who set up and configure displays
+- **End Users:** Individuals controlling LED matrices through mobile app
+- **Administrators:** System managers overseeing multiple users and LightBoxes
+- **Installers:** Technical staff setting up LightBoxes and LED matrices
 
 #### 1.3 Key Value Propositions
-- Seamless control of LED matrices via mobile app
-- Multiple connection methods (WiFi, Bluetooth)
+- Remote control of LED matrices via LightBox controllers
+- Multiple connection methods to LightBox (WiFi, Bluetooth)
 - Real-time status monitoring and control
-- Centralized management for multiple displays
-- Intuitive user interface with advanced controls
+- Centralized management of multiple LightBoxes
+- Flexible and extensible control system
 
 ### 2. System Architecture
 
-#### 2.1 High-Level Components
-- **Client Layer**
+#### 2.1 System Components
+- **User Interface Layer**
   - Mobile Application (Flutter)
   - Web Dashboard (React)
   
-- **Communication Layer**
-  - REST API Service (HTTP)
-  - MQTT Service (Real-time Communication)
+- **Backend Layer**
+  - REST API Service (User Management, Configuration)
+  - MQTT Broker (Real-time Communication)
+  - Database & Cache System
   
-- **Business Layer**
-  - Authentication Service
-  - User Service
-  - LED Control Service
-  - Dashboard Service
-  
-- **Data Layer**
-  - Database (PostgreSQL)
-  - State Cache (Redis)
+- **LightBox Layer**
+  - LightBox Controller
+  - Local Processing Unit
+  - LED Matrix Interface
   
 - **Hardware Layer**
-  - Microcontroller
-  - LED Matrix
-  - MQTT Client (LightBox Integration)
+  - LED Matrix Arrays
+  - Physical Connections
+  - Power Management
 
-  #### 2.2 Server Deployment Options
+#### 2.2 Component Interactions
+- Mobile/Web Apps ↔ Backend: REST API for user management
+- Mobile/Web Apps ↔ MQTT: Real-time control and updates
+- LightBox ↔ MQTT: Command reception and state updates
+- LightBox ↔ LED Matrix: Direct hardware control
+
+#### 2.3 Server Deployment Options
 - **Local Server Mode**
-  - Runs on local network
-  - Direct device communication
-  - Offline capability
-  - Local data storage
+  - Self-hosted on local network
+  - Direct LightBox communication
   - Local MQTT broker
+  - Offline operation capability
+  - Local database and cache
   
 - **Cloud Server Mode**
-  - AWS EC2 hosted
-  - Remote access capability
-  - Data synchronization
-  - Cloud storage backup
+  - AWS EC2 deployment
+  - Remote access support
   - Cloud MQTT broker
+  - Distributed database
+  - High availability setup
   
 - **Hybrid Mode**
-  - Local server primary operation
-  - Cloud server backup
-  - Automatic failover
-  - Data synchronization between modes
-  - Seamless mode switching
+  - Primary local server operation
+  - Cloud server backup/failover
+  - Data synchronization
+  - Automatic mode switching
+  - Split service architecture
 
 ### 3. Core Features
 
 #### 3.1 Mobile Application
 - User authentication and authorization
-- Individual LED control
+- LightBox discovery and pairing
+- Individual LED control through LightBox
 - Group LED control
-- Color selection and management
-- Brightness control
-- Connection management (WiFi/Bluetooth)
-- Device pairing and configuration
-- Offline mode support
+- Color and brightness management
+- Connection type selection (WiFi/Bluetooth)
 - Real-time state synchronization
+- Offline mode capabilities
 
-#### 3.2 Admin Dashboard
-- User management (CRUD operations)
-- LED matrix monitoring
-- System statistics and analytics
-- Power usage tracking
-- User activity monitoring
-- Remote matrix control
-- System health monitoring
-- Batch operations support
+#### 3.2 LightBox Functionality
+- LED matrix state management
+- Local processing of commands
+- Real-time state updates
+- Connection management (WiFi/Bluetooth)
+- Offline operation support
+- Firmware update capability
+- Local cache of settings
+- Direct LED matrix control
 
-#### 3.3 LED Control
-- Individual LED state management
-- Color control (RGB)
-- Brightness adjustment
-- Group operations
-- State persistence
-- Real-time synchronization
-- Pattern support
-- Scheduled operations
+#### 3.3 Admin Dashboard
+- User management
+- LightBox monitoring and management
+- System analytics
+- Remote configuration
+- Usage statistics
+- Troubleshooting tools
 
-#### 3.4 Sensors and I/O Integration
-- **Input Sensors**
-  - Motion detection sensors
-  - Ambient light sensors
-  - Temperature sensors
+  #### 3.4 I/O and Integration Systems
+- **Sensor Integration**
+  - Motion detection input
+  - Ambient light sensing
+  - Temperature monitoring
+  - Occupancy detection
+  - Environmental sensors
   
-- **Output Controls**
-  - Physical on/off switches
-  - Dimmer switches
-  - Emergency override switches
-  - Smart home wall panels
+- **Physical Controls**
+  - Hardware power switches
+  - Manual override controls
+  - Emergency shutoff
+  - External dimmer integration
+  - Status indicators
   
-- **Third-Party Integrations**
-  - Smart home platforms (Home Assistant, HomeKit, Google Home)
-  - Voice assistants (Alexa, Google Assistant, Siri)
-  - Weather services
-  - IFTTT support
-  - Smart switches (Philips Hue, TP-Link, etc.)
+- **Third-Party Systems**
+  - Home automation platforms
+    * Home Assistant
+    * Apple HomeKit
+    * Google Home
+  - Voice assistant integration
+    * Amazon Alexa
+    * Google Assistant
+    * Siri
+  - Smart switch compatibility
+    * Philips Hue
+    * Zigbee/Z-Wave devices
+  - Custom API integration
 
 ### 4. Technical Requirements
 
 #### 4.1 Mobile Application
 - **Framework:** Flutter
-- **Platforms:** iOS and Android
-- **Minimum OS Versions:**
-  - iOS: 13.0+
-  - Android: 6.0+
-- **Connectivity:** WiFi and Bluetooth support
-- **Offline Capability:** Basic functionality without network
-- **State Management:** Local caching and synchronization
+- **Platforms:** iOS (13.0+) and Android (6.0+)
+- **Features:**
+  - Bluetooth LE support
+  - WiFi configuration
+  - Local state caching
+  - Background operation
+  - Push notifications
 
-#### 4.2 Backend Services
+#### 4.2 Backend Infrastructure
 - **Server:** Node.js with Express
 - **Database:** PostgreSQL
 - **Cache:** Redis
 - **Hosting:** AWS EC2
-- **Message Broker:** EMQX
-- **Real-time Communication:** MQTT
+- **Message Broker:** EMQX MQTT
+- **APIs:** REST + MQTT
 
-#### 4.3 Hardware Integration
-- Support for variable matrix sizes
-- Bluetooth LE support
+#### 4.3 LightBox Requirements
 - WiFi connectivity
-- Local control capability
-- Power management
+- Bluetooth LE support
+- Local processing capability
+- LED matrix interface
 - State persistence
+- Firmware update mechanism
+- Error recovery
+- Offline operation
 
-#### 4.4 I/O and Integration Requirements
-- **Sensor Communication**
-  - GPIO interface support
-  - I2C/SPI protocol support
-  - Analog input processing
+  #### 4.4 I/O and Integration Requirements
+- **Hardware I/O**
   - Digital input/output handling
-  - Sensor data sampling rates
+  - Analog sensor support
+  - GPIO interface
+  - I2C/SPI protocols
+  - Serial communication
   
-- **Third-Party APIs**
-  - REST API endpoints for integrations
-  - OAuth2 authentication support
+- **Integration Protocols**
+  - REST API endpoints
   - Webhook support
-  - Rate limiting
-  - API versioning
-
-- **Local Network Integration**
-  - mDNS support for local discovery
+  - OAuth2 authentication
+  - WebSocket connections
+  - Event streaming
+  
+- **Local Network**
+  - mDNS discovery
   - UPnP support
   - Local API endpoints
-  - Network failover handling
-  - Local device pairing
-  
+  - Network failover
+  - Device discovery
+
 ### 5. User Interface
 
 #### 5.1 Mobile Application UI
+- LightBox connection interface
 - Matrix visualization
-- Color picker with presets
+- Color selection tools
 - Brightness controls
-- Connection status indicator
-- Pattern selection interface
-- Schedule management
-- Device configuration
+- Pattern selection
+- Connection status
 - Error notifications
 
 #### 5.2 Admin Dashboard UI
-- User management interface
-- System monitoring displays
-- Analytics visualizations
-- Remote control interface
-- Configuration management
-- Alert and notification system
+- LightBox management
+- User management
+- System monitoring
+- Analytics displays
+- Configuration tools
+- Alert management
 
 ### 6. Communication Protocol
 
 #### 6.1 MQTT Topic Structure
 ```
 lightbox/
-├── devices/{deviceId}/
-│   ├── status            # Device online/offline status
-│   ├── state            # Current LED matrix state
-│   ├── control          # Control commands to the device
-│   ├── response         # Device responses/acknowledgments
-│   └── config           # Device configuration
-├── users/{userId}/
-│   ├── devices/         # List of user's devices
-│   └── preferences/     # User settings
-└── system/
-    ├── broadcast/       # System-wide messages
-    └── monitoring/      # System health data
+├── {lightboxId}/
+│   ├── sensors/           # Sensor data and states
+│   │   ├── motion
+│   │   ├── light
+│   │   └── temperature
+│   ├── controls/          # Physical control states
+│   │   ├── switches
+│   │   ├── dimmers
+│   │   └── overrides
+│   └── integrations/      # Third-party integration states
+├── external/
+│   ├── homeassistant/     # Home Assistant integration
+│   ├── homekit/           # HomeKit integration
+│   └── alexa/             # Alexa integration
 ```
 
-#### 6.2 MQTT Message Formats
+#### 6.2 Message Formats
 
-##### 6.2.1 Device Status Message
+##### 6.2.1 LightBox Status
 ```json
 {
+  "lightboxId": "string",
   "status": "online|offline",
-  "timestamp": "ISO-8601",
   "connectionType": "wifi|bluetooth",
-  "version": "1.0.0"
-}
-```
-
-##### 6.2.2 LED State Message
-```json
-{
-  "matrixSize": {
+  "matrixInfo": {
     "rows": 10,
-    "cols": 10
+    "cols": 10,
+    "firmware": "1.0.0"
   },
-  "leds": [
-    {
-      "index": 0,
-      "state": true,
-      "color": {"r": 255, "g": 0, "b": 0},
-      "brightness": 1.0
-    }
-  ]
+  "timestamp": "ISO-8601"
 }
 ```
 
-##### 6.2.3 Control Command Message
+##### 6.2.2 Matrix Control Command
 ```json
 {
   "commandId": "uuid",
   "type": "single|group|all",
   "action": "setColor|setBrightness|setState",
   "payload": {
-    "targetLeds": [0, 1, 2],
+    "leds": [0, 1, 2],
     "color": {"r": 255, "g": 0, "b": 0},
     "brightness": 1.0
   },
@@ -268,10 +267,23 @@ lightbox/
 }
 ```
 
-#### 6.3 MQTT Quality of Service (QoS)
-- QoS 0: Real-time updates (LED states)
-- QoS 1: Important commands and configurations
-- QoS 2: Critical system operations
+##### 6.2.3 Matrix State Update
+```json
+{
+  "lightboxId": "string",
+  "matrix": {
+    "leds": [
+      {
+        "index": 0,
+        "state": true,
+        "color": {"r": 255, "g": 0, "b": 0},
+        "brightness": 1.0
+      }
+    ]
+  },
+  "timestamp": "ISO-8601"
+}
+```
 
 ### 7. Security Requirements
 
@@ -279,85 +291,58 @@ lightbox/
 - JWT-based authentication
 - Role-based access control
 - Secure token management
-- Password encryption
-- Session management
+- Device-specific authentication
 
 #### 7.2 MQTT Security
-- Username/password authentication
-- JWT token validation
-- ACL rules for topic access
+- Client authentication
+- Topic-based access control
 - SSL/TLS encryption
-- Client certificate support
+- Device verification
 
-#### 7.3 Data Security
-- End-to-end encryption
-- Secure MQTT communication
-- Data encryption at rest
-- Regular security audits
-- Compliance with data protection regulations
-
-#### 7.4 EMQX Configuration
-##### Authentication
-- Enable username/password authentication
-- Use JWT tokens for client authentication
-- Set up ACL rules based on username/client ID
-
-##### Access Control Rules
-- Users can only subscribe to their own topics:
-  - Allow: "lightbox/devices/{deviceId}/#" where deviceId belongs to user
-  - Allow: "lightbox/users/{userId}/#" where userId matches user
-  - Allow: "lightbox/system/broadcast"
-
-##### SSL/TLS Configuration
-- Enable TLS 1.2/1.3
-- Use strong cipher suites
-- Implement certificate-based authentication for production
+#### 7.3 LightBox Security
+- Secure boot
+- Firmware verification
+- Local storage encryption
+- Secure configuration
 
 ### 8. Future Enhancements
 
 #### 8.1 Room Layout Integration
-- Semi-transparent room layout layer
-- Furniture and accessory placement
-- Zone-based lighting control
-- Time-based scheduling
-- Template library
-- 2D visualization
+- Virtual room mapping
+- Zone-based control
+- Furniture placement
+- Lighting effects
+- Scene management
 
 #### 8.2 Advanced Features
-- Pattern creation and sharing
+- Pattern creation
 - Animation support
-- Scene presets
-- Group operation tools
-- Advanced scheduling
+- Multi-LightBox synchronization
 - Energy optimization
-- Multi-device synchronization
+- Advanced scheduling
 
 ### 9. Implementation Phases
 
-#### Phase 1: Foundation (Current)
-- Basic mobile app implementation
-- Essential backend services
-- Core LED control functionality
+#### Phase 1: Core Infrastructure
+- Basic mobile app
+- LightBox communication
+- Essential controls
 - User authentication
-- MQTT communication setup
 
-#### Phase 2: Enhanced Features
+#### Phase 2: Enhanced Control
 - Advanced LED control
-- Admin dashboard
-- Real-time monitoring
-- Performance optimization
 - Pattern support
+- Admin dashboard
+- Monitoring system
 
-#### Phase 3: Advanced Integration
-- Room layout integration
-- Zone-based control
-- Pattern library
-- Advanced scheduling
-- Multi-device support
+#### Phase 3: Advanced Features
+- Room layout system
+- Advanced patterns
+- Multi-device sync
+- Analytics system
 
-#### Phase 4: Optimization & Scale
-- Performance improvements
-- Security enhancements
-- Analytics implementation
+#### Phase 4: Optimization
+- Performance tuning
+- Security hardening
+- Feature expansion
 - System scaling
-- Advanced monitoring
