@@ -20,15 +20,15 @@
 ### 1. Product Overview
 
 #### 1.1 Purpose
-The LED Matrix Control System is a comprehensive solution that enables users to control LED matrices through a mobile application and web dashboard. The system utilizes LightBox controllers as intermediary devices that manage and control the physical LED matrices.
+The LED Matrix Control System is a comprehensive solution that enables users to control LEDs matrix through a mobile application and web dashboard. The system utilizes LightBox controllers as intermediary devices that manage and control the physical LEDs matrix.
 
 #### 1.2 Target Users
-- **End Users:** Individuals controlling LED matrices through mobile app
+- **End Users:** Individuals controlling LEDs matrix through mobile app
 - **Administrators:** System managers overseeing multiple users and LightBoxes
-- **Installers:** Technical staff setting up LightBoxes and LED matrices
+- **Installers:** Technical staff setting up LightBoxes and LEDs matrix
 
 #### 1.3 Key Value Propositions
-- Remote control of LED matrices via LightBox controllers
+- Remote control of LEDs matrix via LightBox controllers
 - Multiple connection methods to LightBox (WiFi, Bluetooth)
 - Real-time status monitoring and control
 - Centralized management of multiple LightBoxes
@@ -173,6 +173,21 @@ The LED Matrix Control System is a comprehensive solution that enables users to 
 - Error recovery
 - Offline operation
 
+**Operating System Compatibility:**
+- **Client OS Support:**
+  - Linux systems
+  - Android devices
+  - iOS devices
+  - Windows systems (optional)
+
+**Communication Support:**
+- Standard networking protocols (TCP/IP)
+- Bluetooth LE profiles for major OS
+- Platform-specific SDKs/APIs:
+  - Linux socket communication
+  - Android BLE API
+  - iOS Core Bluetooth
+
   #### 4.4 I/O and Integration Requirements
 - **Hardware I/O**
   - Digital input/output handling
@@ -284,6 +299,25 @@ lightbox/
   "timestamp": "ISO-8601"
 }
 ```
+#### 6.3 Platform-Specific Communication
+
+**Linux Systems:**
+- Socket communication (TCP/IP)
+- MQTT client libraries
+- D-Bus support (optional)
+- Serial port communication (if needed)
+
+**Android Devices:**
+- Android BLE API
+- WiFi Direct support
+- Network Service Discovery
+- Background Service support
+
+**Cross-Platform Considerations:**
+- Standard communication protocols
+- Platform-agnostic message formats
+- Error handling for each platform
+- Connection management across OS
 
 ### 7. Security Requirements
 
