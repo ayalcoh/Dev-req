@@ -1,307 +1,809 @@
-# LED Matrix Control System - Mobile App Masterplan
+# LED Matrix Control System - Detailed UI/UX Specifications
 
-## 1. App Overview and Objectives
+## 1. User Interface Architecture
 
-### 1.1 Purpose
-The LED Matrix Control System mobile application enables users to control LED matrices through LightBox controllers, creating customized lighting scenarios, patterns, and schedules. The app serves as the primary interface between users and their LED installations.
+### 1.1 Mobile Application (Flutter)
 
-### 1.2 Core Objectives
-- Provide intuitive control of LED matrices via LightBox controllers
-- Enable creation and management of lighting patterns and animations
-- Support scheduling of lighting changes
-- Integrate room layout visualization for contextual lighting design
-- Operate in both online and offline modes
-- Ensure seamless connectivity via Bluetooth and WiFi
+- **Splash Screen**: Company logo with subtle LED animation effect
+- **Authentication Flow**: Login, registration, password recovery screens
+- **Main Navigation**: Bottom tab navigation with 5 main sections
+- **Home Dashboard**: Overview of connected LightBox with status and quick controls
+- **LED Control Screen**: Interactive matrix visualization with control panels
+- **Patterns Library**: Browse, apply, create, and manage lighting patterns
+- **Schedule Manager**: Create and manage time-based lighting changes
+- **Settings**: LightBox configuration and user profile management
 
-### 1.3 Value Proposition
-The application bridges the gap between technical LED matrix control and user-friendly interaction, allowing architects and homeowners to design sophisticated lighting scenarios without requiring technical expertise.
+## 2. Detailed Screen Specifications
 
-## 2. Target Audience
+### 2.1 Authentication Screens
 
-### 2.1 Primary Users
-- **Architects**: Professional users who need to design and visualize lighting scenarios for their projects
-- **Homeowners**: Individuals who want to control smart LED installations in their homes
-- **Building Managers**: Professionals responsible for managing lighting in commercial or residential buildings
+#### 2.1.1 Login Screen
+- Email field with validation
+- Password field with show/hide toggle
+- "Remember me" checkbox
+- Primary CTA: "Log In" button (full width)
+- Secondary links: "Forgot password?" and "Create account"
+- Error handling for invalid credentials
+- Loading state during authentication
 
-### 2.2 User Characteristics
-- Varying levels of technical expertise
-- Interest in customizable lighting solutions
-- Desire for visual interfaces rather than technical controls
-- Need for both immediate control and scheduled automation
+#### 2.1.2 Registration Screen
+- Name field
+- Email field with validation
+- Password field with strength indicator
+- Confirm password field
+- Terms of service checkbox with link to terms
+- Primary CTA: "Create Account" button (full width)
+- Secondary link: "Already have an account?"
+- Step-by-step progress indicator
+- Error handling for each field
 
-## 3. Core Features and Functionality
+#### 2.1.3 Password Recovery
+- Email input screen
+- Verification code input screen
+- New password creation screen
+- Success confirmation screen
+- Clear progress indicator between steps
 
-### 3.1 User Authentication
-- Email/password authentication
-- Secure login and account management
-- Password recovery functionality
-- User profile management
+### 2.2 Home Dashboard
 
-### 3.2 Home Dashboard
-- **LightBox Overview**:
-  - Cards for connected LightBox
+#### 2.2.1 LightBox Overview
+- LightBox card with:
+  - Device name (editable on long press)
   - Status indicator (online/offline)
   - Connection type icon (WiFi/Bluetooth)
-  - Quick action buttons (power on/off)
-  - Thumbnail of current LED state
-- **Notifications Panel**:
-  - System alerts and messages
-  - Firmware update notifications
-  - Connection status changes
+  - Battery level (if applicable)
+  - Quick action buttons: power toggle, brightness preset, favorite pattern
+  - Thumbnail preview of current LED state
+- Pull-to-refresh functionality
+- Add device button (if no devices connected)
 
-### 3.3 LightBox Discovery and Connection
-- Bluetooth scanning for nearby LightBox controllers
-- WiFi connection setup
-- Connection status monitoring
-- Automatic reconnection
-- Connection type switching (Bluetooth/WiFi)
+#### 2.2.2 Notifications Panel
+- Accessible via bell icon in app bar
+- Categorized notifications:
+  - System alerts (high priority)
+  - Firmware updates (medium priority)
+  - Connection status changes (low priority)
+- Clear all button
+- Individual dismissible notifications
+- Read/unread status indicators
+- Timestamp for each notification
 
-### 3.4 Matrix Control Interface
-- Grid-based representation of the LED matrix
-- Individual LED selection
-- Group selection tools
-- Color selection via modern interface (color wheel + RGB/HSB controls)
-- Brightness controls
-- Real-time preview of changes
+### 2.3 LightBox Discovery and Connection
 
-### 3.5 Pattern Creator
-- Save and load lighting patterns
-- Pattern naming and organization
-- Pattern categories
-- Animation creation tools:
-  - Color transitions (fading between colors)
-  - Moving patterns (waves, pulses, chasing effects)
-  - Reactive animations
-  - Pre-set animation templates
-- Pattern preview functionality
+#### 2.3.1 Discovery Screen
+- Animated scanning visualization
+- Segmented list of discovered devices:
+  - Previously connected devices
+  - New devices
+- For each device:
+  - Device name/ID
+  - Signal strength indicator
+  - Connection type icon
+  - "Connect" button
+- Manual connection option (via device ID)
+- Connection type toggle (WiFi/Bluetooth)
+- Refresh button
+- Troubleshooting tips expandable section
 
-### 3.6 Schedule Manager
-- Time-based lighting changes
-- Day/week scheduling
-- Recurring schedules
-- One-time events
-- Schedule enabling/disabling
-- Schedule notifications
+#### 2.3.2 Connection Setup
+- Step-by-step process with progress indicator
+- For WiFi connection:
+  - Available networks list
+  - Password input
+  - Connection security information
+- For Bluetooth connection:
+  - Pairing process visualization
+  - PIN input if required
+- Connection progress indicator with status messages
+- Success confirmation with animation
+- Troubleshooting options for failed connections
+- "Next" button to proceed to LED control
 
-### 3.7 Room Layout Integration (Future Phase)
-- Camera-based room scanning
-- Manual room drawing tools
-- Floor plan import
-- Furniture and accessory placement
-- Three-layered visualization:
-  - Room Layout Layer
-  - LED Matrix Layer
-  - Control and Interaction Layer
-- Zonal lighting control
-- Object-based lighting adaptation
+### 2.4 LED Control Screen
 
-### 3.8 Settings
-- **User Settings**:
-  - Profile information
-  - Notification preferences
-  - Theme selection
+#### 2.4.1 Matrix Visualization
+- Interactive grid representation of LED matrix
+- Dynamically sized based on LightBox configuration
+- Color-accurate LED state representation
+- Selection modes:
+  - Single LED selection
+  - Multi-select via tap and drag
+  - Pattern-based selection (line, rectangle, circle)
+  - "Select all" option
+- Zoom controls:
+  - Pinch to zoom gesture
+  - Zoom in/out buttons
+  - "Fit to screen" button
+- Pan functionality with inertial scrolling
+- Grid overlay with coordinates
+- Selection highlighting with semi-transparent overlay
+
+#### 2.4.2 Color Controls
+- Color selection panel with:
+  - Color wheel with brightness/saturation controls
+  - RGB sliders with numerical input
+  - Hex color input field
+  - Eyedropper tool for sampling colors
+  - Swatches of recently used colors (8 slots)
+  - Saved favorite colors (long press to save)
+- Brightness control:
+  - Vertical slider (0-100%)
+  - Preset buttons (25%, 50%, 75%, 100%)
+  - Numerical input field
+- Effects panel:
+  - Blink effect with frequency control
+  - Fade effect with duration control
+  - Rainbow cycle with speed control
+  - Custom effect selection
+
+#### 2.4.3 Control Panel
+- Primary action buttons:
+  - "Apply" button (updates selected LEDs)
+  - "All On/Off" toggle
+  - "Reset to Default" button
+  - "Save as Pattern" button
+- Secondary controls:
+  - "Undo" button (with counter)
+  - "Redo" button
+  - "Copy" and "Paste" for LED selections
+  - "Invert Selection" button
+- Mode toggles:
+  - "Draw" mode
+  - "Erase" mode
+  - "Select" mode
+  - "Pattern" mode
+
+#### 2.4.4 LED Details Dialog
+- Appears on long press of individual LED
+- Shows:
+  - LED coordinates/index
+  - Current color (HEX and RGB values)
+  - Current brightness percentage
+  - On/off status
+- Individual controls:
+  - Color picker
+  - Brightness slider
+  - On/off toggle
+- "Apply to selection" button
+- "Copy settings" button
+- Close button
+
+### 2.5 Patterns Library
+
+#### 2.5.1 Pattern Browser
+- Segmented navigation:
+  - "All Patterns"
+  - "My Patterns"
+  - "Favorites"
+  - "Recent"
+- Grid layout of pattern thumbnails:
+  - 2 columns (portrait)
+  - 4 columns (landscape)
+- For each pattern:
+  - Animated thumbnail
+  - Pattern name
+  - Favorite indicator (star icon)
+- Sort options:
+  - Newest first
+  - Alphabetical
+  - Most used
+- Filter options:
+  - By category (static, animated, etc.)
+  - By color scheme
+- Search bar with instant results
+- "Create New" FAB
+
+#### 2.5.2 Pattern Details
+- Pattern preview:
+  - Large animated visualization
+  - Play/pause button for animations
+  - Speed control for animations
+- Information panel:
+  - Pattern name
+  - Creation date
+  - Last modified date
+  - Used count and frequency
+- Action buttons:
+  - "Apply to LightBox" (primary CTA)
+  - "Edit Pattern"
+  - "Add to Favorites"
+  - "Share" (future feature)
+  - "Delete" (with confirmation)
+- Related patterns section
+
+#### 2.5.3 Pattern Creator
+- Matrix editor with same controls as LED Control Screen
+- Animation timeline:
+  - Frame-by-frame editor
+  - Add/delete frames
+  - Duration control for each frame
+  - Copy/paste frames
+  - Preview animation
+- Effect builder:
+  - Transition type selection
+  - Speed/duration controls
+  - Direction controls
+  - Preview window
+- Save dialog:
+  - Pattern name input
+  - Optional description
+  - Category selection
+  - Thumbnail preview
+  - Private/shared toggle (future)
+- Test functionality:
+  - "Test on LightBox" button
+  - Preview window
+  - Speed adjustment
+
+### 2.6 Schedule Manager
+
+#### 2.6.1 Schedules List
+- Calendar view toggle:
+  - Day view
+  - Week view
+  - Month view
+- Timeline view toggle:
+  - Horizontal timeline
+  - List view
+- For each scheduled event:
+  - Time range visualization
+  - Pattern thumbnail
+  - Event name
+  - Recurrence indicator
+  - Enabled/disabled toggle
+- "Add Schedule" FAB
+- Filter options:
+  - By LightBox
+  - By pattern
+  - By time of day
+
+#### 2.6.2 Schedule Creator/Editor
+- Basic information:
+  - Schedule name
+  - Pattern selection (with preview)
+  - LightBox selection
+- Time settings:
+  - Start time picker
+  - End time picker
+  - Duration visualization
+- Recurrence settings:
+  - One-time / Recurring toggle
+  - Day selection for weekly recurrence
+  - Monthly options
+  - End date or repeat count
+- Transition settings:
+  - Fade in duration
+  - Fade out duration
+- Notification toggle
+- Save/Cancel buttons
+- "Delete Schedule" option (for existing schedules)
+
+### 2.7 Room Layout Editor (Future Phase)
+
+#### 2.7.1 Room Scanner
+- Camera view with AR overlay
+- Guide markers for optimal scanning
+- Real-time 3D mesh visualization
+- Progress indicator
+- "Capture" button
+- Guidance instructions
+- Review screen:
+  - 3D preview of captured space
+  - Edit options
+  - "Use this scan" button
+  - "Scan again" button
+
+#### 2.7.2 Layout Editor
+- Top-down view of room layout
+- Pan and zoom controls
+- Object toolbar:
+  - Walls
+  - Doors
+  - Windows
+  - Furniture categories
+  - Decorative elements
+- Properties panel for selected objects:
+  - Size controls
+  - Orientation controls
+  - Color/material selection
+  - Delete button
+- "Add LED Matrix" placement tool
+- Layer controls:
+  - Room layout layer toggle
+  - LED matrix layer toggle
+  - Control layer toggle
+- "Save Layout" button
+- "Import Floor Plan" option
+
+#### 2.7.3 Lighting Visualization
+- Combined view of room layout and LED effects
+- Lighting simulation with:
+  - Light spread visualization
+  - Shadow effects
+  - Brightness adjustment based on distance
+  - Surface reflection simulation
+- Time slider for animated patterns
+- "Apply to LightBox" button
+- "Edit Pattern" button
+- "Adjust Layout" button
+
+### 2.8 Settings Screens
+
+#### 2.8.1 User Settings
+- Profile section:
+  - Profile picture (editable)
+  - Name (editable)
+  - Email (editable with verification)
+  - Account creation date
+- Preferences section:
+  - Notification toggles by category
+  - Theme selection (light/dark/system)
+  - Language selection
+  - Temperature unit (°C/°F)
+- Security section:
   - Change password
-  - Logout button
-- **LightBox Settings**:
-  - Device information
-  - Rename device
-  - Connection preferences
-  - Firmware update
+  - Two-factor authentication toggle
+  - Connected devices list
+- Data Management:
+  - Sync settings
+  - Cloud storage usage
+  - Clear cache option
+- "Logout" button
+- "Delete Account" option (with confirmation)
+
+#### 2.8.2 LightBox Settings
+- Device information:
+  - Device name (editable)
+  - Model number
+  - Serial number
+  - MAC address
+  - IP address (if on WiFi)
+  - Firmware version
+- Connection settings:
+  - Connection type preference
+  - WiFi network selection
+  - Bluetooth settings
+- LED matrix configuration:
+  - Matrix size settings
+  - LED type selection
+  - Default brightness
+  - Power-on behavior
+- Firmware section:
+  - Current version information
+  - Check for updates button
+  - Update history
+  - Auto-update toggle
+- Maintenance:
+  - Restart device option
   - Factory reset option
-  - Remove device option
+  - Diagnostic tests
+- "Remove Device" option (with confirmation)
 
-### 3.9 Offline Functionality
-- Complete LED control while offline
-- Local pattern storage and application
-- Scheduling capabilities in offline mode
-- Background synchronization when connection is restored
+## 3. User Flows
 
-## 4. Technical Stack Recommendations
+### 3.1 First-Time User Experience
 
-### 4.1 Development Framework
-- **Flutter**: Cross-platform development to target both iOS and Android from a single codebase
-  - Pros: Faster development time, consistent UI across platforms, strong community support
-  - Cons: Potentially larger app size, occasional platform-specific issues
+1. User installs and opens app
+2. Splash screen displayed briefly
+3. Onboarding screens introduce key features (3-4 screens)
+4. Registration/Login screen presented
+5. After authentication, LightBox discovery screen appears
+6. User follows guided process to connect first LightBox
+7. Quick tutorial overlay highlights main controls
+8. User completes first action (turn on LED, change color)
+9. Success celebration animation
+10. User directed to Home Dashboard
 
-### 4.2 Connectivity
-- **Bluetooth LE**: For direct, local communication with LightBox controllers
-- **WiFi**: For network-based communication and remote control
-- **MQTT Protocol**: For real-time messaging and state synchronization
+### 3.2 LED Control Flow
 
-### 4.3 Data Storage
-- **Local Storage**: Flutter secure storage and SQLite for offline data
-- **Cloud Synchronization**: Firebase Firestore or custom backend for cloud storage
-- **State Management**: Provider or Bloc pattern for reactive UI updates
+1. User selects a LightBox from dashboard
+2. LED Control screen loads with current matrix state
+3. User selects LEDs (single tap, multi-select, or pattern select)
+4. User chooses color and brightness
+5. User taps "Apply" to update selected LEDs
+6. Real-time confirmation as LEDs update
+7. User can continue editing or save as pattern
+8. When finished, user returns to dashboard or navigates to another section
 
-### 4.4 Authentication
-- **Firebase Authentication** or custom authentication system with JWT
-- Secure token storage and management
-- Session handling and refresh mechanisms
+### 3.3 Pattern Creation Flow
 
-## 5. Conceptual Data Model
+1. User navigates to Pattern Library
+2. User taps "Create New" button
+3. Pattern Creator opens with blank matrix or current state
+4. User designs initial LED state
+5. For static pattern:
+   - User finalizes design
+   - User taps "Save Pattern"
+   - User enters name and details
+   - User returns to Pattern Library
+6. For animated pattern:
+   - User taps "Add Frame"
+   - User designs next frame
+   - User sets timing
+   - User repeats until animation complete
+   - User previews animation
+   - User saves with name and details
 
-### 5.1 User Data
-- User profile information
-- Authentication credentials
-- Preferences and settings
+### 3.4 Schedule Creation Flow
 
-### 5.2 LightBox Data
-- Device identifiers and names
-- Connection details (Bluetooth ID, IP address)
-- Current status and configuration
-- Firmware version
+1. User navigates to Schedule Manager
+2. User taps "Add Schedule" button
+3. Schedule Creator opens
+4. User enters schedule name
+5. User selects pattern from library
+6. User sets time parameters and recurrence
+7. User selects target LightBox
+8. User saves schedule
+9. New schedule appears in list
+10. At scheduled time, app sends notification (if enabled)
+11. Pattern automatically applies to LightBox
 
-### 5.3 LED Matrix Data
-- Matrix dimensions (rows, columns)
-- Current state of each LED (color, brightness)
-- LED groupings
+### 3.5 Room Layout Integration Flow
 
-### 5.4 Pattern Data
-- Pattern name and description
-- LED states and configurations
-- Animation parameters
-- Timestamps and metadata
+1. User navigates to Room Layout section
+2. For new layout:
+   - User chooses creation method (scan, draw, import)
+   - User follows method-specific process
+   - Basic layout is created
+3. User adds/adjusts furniture and objects
+4. User places LED matrix in layout
+5. User switches to lighting visualization mode
+6. User tests different patterns in room context
+7. User saves layout with name
+8. User can apply visualized pattern to actual LightBox
 
-### 5.5 Schedule Data
-- Schedule name and description
-- Time parameters (start, end, days, recurrence)
-- Associated patterns
-- Activation status
+## 4. Interaction Specifications
 
-### 5.6 Room Layout Data (Future Phase)
-- Room dimensions and structure
-- Furniture and accessory placements
-- Zone definitions
-- Lighting associations
+### 4.1 LED Matrix Interactions
 
-## 6. User Interface Design Principles
+- **Tap**: Select single LED or toggle selection in multi-select mode
+- **Double Tap**: Reset view to show entire matrix
+- **Long Press**: Open detailed control for specific LED
+- **Tap and Drag**: Select multiple LEDs in a line or region
+- **Swipe**: Pan across matrix when zoomed in
+- **Pinch**: Zoom in/out of matrix view
+- **Two-finger Rotate**: Rotate view (if supported by matrix)
 
-### 6.1 Visual Style
-- Clean, modern aesthetic
-- Minimalist where appropriate, with rich visual elements for lighting visualization
-- Consistent color scheme and typography
-- High contrast for visibility
-- Intuitive iconography
+### 4.2 Color Selection Interactions
 
-### 6.2 Navigation Structure
-- Bottom navigation for primary sections
-- Contextual navigation for specific functions
-- Clear hierarchy of information
-- Breadcrumb navigation for complex flows
+- **Tap Color Wheel**: Select color at tap point
+- **Drag on Color Wheel**: Fine-tune color selection
+- **Tap Slider**: Jump to position
+- **Drag Slider**: Smooth adjustment
+- **Tap Swatch**: Apply saved color
+- **Long Press Swatch**: Save current color to swatch
+- **Double Tap RGB Field**: Open numerical input keyboard
 
-### 6.3 Interaction Patterns
-- Drag and drop for LED selection and positioning
-- Tap and hold for contextual options
-- Swipe gestures for quick actions
-- Pinch to zoom in room layout editor
+### 4.3 Pattern Library Interactions
 
-### 6.4 User Feedback
-- Visual feedback for all actions
-- Animated transitions between states
-- Loading indicators for background processes
-- Toast notifications for confirmations
-- Error messages with recovery options
+- **Tap Pattern**: Open pattern details
+- **Long Press Pattern**: Show quick action menu (apply, edit, favorite)
+- **Swipe Pattern Left**: Quick delete (with confirmation)
+- **Swipe Pattern Right**: Quick favorite toggle
 
-### 6.5 Accessibility
-- High contrast options
-- Text scaling support
-- Screen reader compatibility
-- Alternative input methods
-- Keyboard navigation support
+### 4.4 Schedule Interactions
 
-## 7. Security Considerations
+- **Tap Schedule**: Open schedule details
+- **Tap Toggle**: Enable/disable schedule
+- **Swipe Schedule Left**: Quick delete (with confirmation)
+- **Drag on Timeline**: Adjust schedule duration
 
-### 7.1 User Authentication
-- Secure password storage (hashing, salting)
-- Token-based authentication
-- Session timeout and renewal
-- Device tracking and management
+### 4.5 Room Layout Interactions
 
-### 7.2 Data Protection
-- Encryption of sensitive data
-- Secure storage of credentials
-- HTTPS communication
-- Data validation and sanitization
+- **Tap Object**: Select object in layout
+- **Drag Object**: Move object in layout
+- **Pinch Object**: Resize object
+- **Two-finger Rotate**: Rotate object
+- **Double Tap Object**: Open object properties
+- **Tap and Hold Empty Space**: Add new object menu
 
-### 7.3 Device Security
-- Secure pairing process
-- Authentication for LightBox connections
-- Communication encryption
-- Access control for shared devices
+### 4.6 Gesture Consistency Rules
 
-## 8. Development Phases
+- Long press always reveals detailed options
+- Swipe left/right for destructive/constructive quick actions
+- Double tap for reset or default views
+- Tap and drag for selection or movement
+- Two-finger gestures for view manipulation
 
-### 8.1 Phase 1: Core Functionality
-- User authentication system
-- Home dashboard
-- LightBox discovery and connection
-- Basic matrix control interface
-- Settings screens
+## 5. Visual Design Guidelines
 
-### 8.2 Phase 2: Pattern and Schedule Management
-- Advanced matrix control
-- Pattern creator with basic functionality
-- Schedule manager
-- Offline mode capabilities
-- Data synchronization
+### 5.1 Color Palette
 
-### 8.3 Phase 3: Animation and Advanced Features
-- Advanced pattern creator with animations
-- Enhanced user interface
-- Performance optimizations
-- Additional LightBox management features
+- **Primary Color**: #2D7CEB (Blue)
+- **Secondary Color**: #FF5722 (Orange)
+- **Background Colors**:
+  - Light theme: #FFFFFF (White), #F5F7FA (Light Gray)
+  - Dark theme: #121212 (Black), #1E1E1E (Dark Gray)
+- **Accent Colors**:
+  - Success: #4CAF50 (Green)
+  - Warning: #FFC107 (Amber)
+  - Error: #F44336 (Red)
+  - Info: #2196F3 (Light Blue)
+- **Text Colors**:
+  - Primary text: #212121 (Dark Gray)
+  - Secondary text: #757575 (Medium Gray)
+  - Disabled text: #9E9E9E (Light Gray)
+  - Light theme contrast text: #FFFFFF (White)
 
-### 8.4 Phase 4: Room Layout Integration
-- Camera-based room scanning
-- Manual room drawing tools
-- Floor plan import
-- Furniture and accessory placement
-- Layout-based lighting control
+### 5.2 Typography
 
-## 9. Potential Challenges and Solutions
+- **Primary Font**: Roboto
+- **Headings**:
+  - H1: Roboto Medium, 24sp
+  - H2: Roboto Medium, 20sp
+  - H3: Roboto Medium, 18sp
+  - H4: Roboto Medium, 16sp
+- **Body Text**:
+  - Body 1: Roboto Regular, 16sp
+  - Body 2: Roboto Regular, 14sp
+- **Small Text**:
+  - Caption: Roboto Light, 12sp
+  - Overline: Roboto Medium, 10sp, all caps
+- **Buttons**:
+  - Primary: Roboto Medium, 16sp
+  - Secondary: Roboto Medium, 14sp
 
-### 9.1 Bluetooth Connectivity Issues
-- **Challenge**: Inconsistent Bluetooth connections across devices
-- **Solution**: Implement robust connection retry and status monitoring, with graceful degradation to alternative connection methods
+### 5.3 Component Styles
 
-### 9.2 Real-time Synchronization
-- **Challenge**: Ensuring LED state is accurately reflected across multiple devices
-- **Solution**: Utilize MQTT for real-time updates with local caching for offline operations
+#### 5.3.1 Buttons
+- **Primary Button**:
+  - Background: Primary color
+  - Text: White
+  - Elevation: 2dp
+  - Corner radius: 8dp
+  - Height: 48dp
+  - Horizontal padding: 16dp
+- **Secondary Button**:
+  - Border: 1.5dp Primary color
+  - Text: Primary color
+  - Elevation: 0dp
+  - Corner radius: 8dp
+  - Height: 48dp
+  - Horizontal padding: 16dp
+- **Icon Button**:
+  - Size: 40dp x 40dp
+  - Touch target: 48dp x 48dp
+  - Ripple effect on tap
 
-### 9.3 Complex Animation Rendering
-- **Challenge**: Performance issues when rendering complex animations on lower-end devices
-- **Solution**: Implement performance throttling and simplified preview modes for older devices
+#### 5.3.2 Cards
+- **Standard Card**:
+  - Background: Surface color
+  - Elevation: 1dp
+  - Corner radius: 12dp
+  - Padding: 16dp
+- **LightBox Card**:
+  - Background: Surface color
+  - Elevation: 2dp
+  - Corner radius: 12dp
+  - Padding: 16dp
+  - Image height: 120dp
+  - Title size: H3
+  - Subtitle size: Body 2
 
-### 9.4 Room Layout Accuracy
-- **Challenge**: Ensuring scanned rooms are accurately represented
-- **Solution**: Provide manual adjustment tools and calibration options to fine-tune automatic scans
+#### 5.3.3 Input Fields
+- **Text Field**:
+  - Background: Light Gray (Light theme), Dark Gray (Dark theme)
+  - Border: None (flat) or 1dp line
+  - Corner radius: 8dp
+  - Height: 56dp
+  - Label: Caption size, above field
+  - Helper text: Caption size, below field
+  - Error state: Red border and text
+- **Checkbox**:
+  - Size: 24dp x 24dp
+  - Touch target: 48dp x 48dp
+  - Label: Body 2 size
 
-### 9.5 Cross-Platform Consistency
-- **Challenge**: Maintaining consistent user experience across iOS and Android
-- **Solution**: Utilize Flutter's widget system while respecting platform-specific interaction patterns
+#### 5.3.4 Tabs
+- **Navigation Tabs**:
+  - Height: 56dp
+  - Icon size: 24dp
+  - Label: Caption size
+  - Active indicator: 2dp line or pill shape
+  - Active color: Primary color
+  - Inactive color: Gray
 
-## 10. Future Expansion Possibilities
+### 5.4 Iconography
 
-### 10.1 Voice Control Integration
-- Voice commands for lighting control
-- Integration with smart assistants (Alexa, Google Assistant)
+- Consistent icon set (Material Design icons)
+- Icon sizes:
+  - Navigation icons: 24dp
+  - List item icons: 24dp
+  - Small UI icons: 16dp
+  - Large feature icons: 32dp
+- Icon colors follow color palette
+- Use outlined style for general UI
+- Use filled style for active/selected states
 
-### 10.2 Advanced Automation
-- Sensor-based lighting triggers
-- Geofencing and location-based automation
-- Integration with smart home platforms
+### 5.5 Layout Guidelines
 
-### 10.3 Collaborative Features
-- Pattern sharing between users
-- Collaborative editing of lighting designs
-- Community pattern marketplace
+- Grid system: 8dp baseline grid
+- Standard margins: 16dp
+- Content padding: 16dp
+- List item height: 72dp (with icon and secondary text)
+- Vertical spacing between sections: 24dp
+- Use responsive layout techniques:
+  - Single column layout on phones
+  - Two-column layout on tablets
+  - Adaptive cards and grids
 
-### 10.4 Augmented Reality Visualization
-- AR preview of lighting effects in real space
-- Interactive AR room scanning and visualization
-- Live AR overlay of planned lighting changes
+## 6. Status & Feedback Systems
 
-### 10.5 Analytics and Insights
-- Usage patterns and statistics
-- Energy consumption monitoring
-- Optimization recommendations
+### 6.1 Connection Status Indicators
+
+- **Online Status**:
+  - Green dot indicator
+  - "Connected" text
+  - Connection type icon (WiFi/Bluetooth)
+  - Signal strength indicator (if applicable)
+- **Offline Status**:
+  - Red dot indicator
+  - "Disconnected" text
+  - Last seen timestamp
+  - "Reconnect" button
+- **Connecting Status**:
+  - Yellow dot indicator with pulsing animation
+  - "Connecting..." text
+  - Progress indicator
+- **Error Status**:
+  - Red dot with exclamation mark
+  - Error message
+  - Troubleshooting button
+
+### 6.2 User Action Feedback
+
+- **Loading States**:
+  - Circular progress for indeterminate operations
+  - Linear progress for determinate operations
+  - Skeleton screens for content loading
+  - Transparent overlay for modal loading
+- **Success Feedback**:
+  - Green checkmark animation
+  - Success toast notification (2s display)
+  - Haptic feedback (subtle vibration)
+  - Success sound (optional, respects system settings)
+- **Error Feedback**:
+  - Red error icon
+  - Error toast or dialog with explanation
+  - Haptic feedback (error pattern)
+  - Retry option when applicable
+- **Empty States**:
+  - Illustrative graphics
+  - Helpful text explaining the empty state
+  - Suggestion for next action
+  - Primary CTA button
+
+### 6.3 System Notifications
+
+- **Push Notifications**:
+  - LightBox connection changes
+  - Scheduled events starting
+  - Firmware updates available
+  - System alerts requiring attention
+- **In-App Notifications**:
+  - Toast messages for transient information
+  - Banner notifications for important alerts
+  - Notification center for history
+  - Badge counters on navigation items
+
+## 7. Accessibility Considerations
+
+### 7.1 Visual Accessibility
+
+- **Contrast Ratios**:
+  - Text meets WCAG AA standard (4.5:1 for normal text, 3:1 for large text)
+  - UI components have sufficient contrast from background
+- **Text Scaling**:
+  - UI supports text size increase up to 200%
+  - Layouts adapt to text size changes
+- **Color Independence**:
+  - Information not conveyed by color alone
+  - Alternative indicators (icons, patterns) supplement color
+- **Dark Mode Support**:
+  - Complete dark theme for all screens
+  - Reduced brightness for nighttime usage
+
+### 7.2 Interactive Accessibility
+
+- **Touch Targets**:
+  - Minimum size of 48dp x 48dp
+  - Adequate spacing between targets (8dp minimum)
+- **Gesture Alternatives**:
+  - Button alternatives for gestures
+  - Simple interaction patterns
+- **Focus Indicators**:
+  - Visible focus state for all interactive elements
+  - Logical focus order for keyboard navigation
+- **Screen Reader Support**:
+  - All UI elements have appropriate content descriptions
+  - Custom components implement accessibility interfaces
+  - Live regions for dynamic content
+
+### 7.3 Cognitive Accessibility
+
+- **Clear Labeling**:
+  - Descriptive button labels
+  - Explanatory helper text
+  - Iconography paired with text
+- **Progressive Disclosure**:
+  - Complex features revealed gradually
+  - Advanced options in expandable sections
+- **Error Prevention**:
+  - Confirmation for destructive actions
+  - Clear error messages with solutions
+  - Undo functionality where appropriate
+
+## 8. Performance Expectations
+
+### 8.1 Loading Time Standards
+
+- App cold start: Under 2 seconds
+- Screen transitions: Under 300ms
+- LED state updates: Under 100ms local, under 500ms remote
+- Pattern application: Under
+ 200ms
+- Animation playback: 60fps minimum
+
+### 8.2 Responsiveness Standards
+
+- Touch response: Under 100ms
+- Slider/control updates: Real-time (no perceivable lag)
+- Color selection updates: Real-time preview
+- Keyboard input: No typing lag
+
+### 8.3 Offline Performance
+
+- Seamless transition between online/offline modes
+- Offline capabilities clearly indicated
+- Appropriate caching of patterns and settings
+- Background synchronization when connection restored
+
+### 8.4 Battery Optimization
+
+- Efficient Bluetooth connection management
+- Background activity minimization
+- Appropriate refresh rates for UI updates
+- Power-saving mode support
+
+## 9. Implementation Guidelines
+
+### 9.1 Flutter Implementation
+
+- Use Material Design 3 components
+- Implement responsive layouts with:
+  - LayoutBuilder
+  - MediaQuery
+  - Flex widgets (Row, Column)
+- State management using Provider or Bloc pattern
+- Animation framework for smooth transitions
+- Custom painting for LED matrix visualization
+- Platform channel implementation for native Bluetooth/WiFi functionality
+
+### 9.2 Asset Requirements
+
+- App icon in multiple resolutions
+- Splash screen image
+- Onboarding illustrations
+- Empty state illustrations
+- Navigation icons
+- Action icons
+- Success/error/warning icons
+- Pattern thumbnail placeholder
+- LightBox device illustrations
+
+### 9.3 Code Organization
+
+- Feature-based folder structure
+- Separation of UI and business logic
+- Reusable component library
+- Consistent naming conventions
+- Documentation for complex widgets
+- Accessibility annotations
+
+### 9.4 Testing Requirements
+
+- Unit tests for business logic
+- Widget tests for UI components
+- Integration tests for user flows
+- Device compatibility testing
+- Performance benchmarking
