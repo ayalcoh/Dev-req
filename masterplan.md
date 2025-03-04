@@ -11,6 +11,8 @@
 - **LED Control Screen**: Interactive matrix visualization with control panels
 - **Patterns Library**: Browse, apply, create, and manage lighting patterns
 - **Schedule Manager**: Create and manage time-based lighting changes
+- **Sensors Dashboard**: Monitor and configure connected sensors
+- **Automation Rules**: Create and manage sensor-triggered lighting behaviors
 - **Settings**: LightBox configuration and user profile management
 
 ## 2. Detailed Screen Specifications
@@ -379,6 +381,172 @@
   - Diagnostic tests
 - "Remove Device" option (with confirmation)
 
+### 2.9 Sensor Management Screens
+
+#### 2.9.1 Sensors Dashboard
+- Main sensors overview with:
+  - Card-based layout showing sensor categories
+  - Status indicators for each sensor type (active, inactive, error)
+  - Quick-view of latest readings with timestamp
+  - Color-coded alerts for out-of-range values
+  - Pull-to-refresh functionality
+  - "Add Sensor" button
+- Filter controls:
+  - By sensor type (motion, environmental, acoustic, security)
+  - By status (all, active, inactive, alerts)
+  - By location/room
+- Sorting options:
+  - Most recent activity
+  - Alert priority
+  - Alphabetical
+  - Custom order
+- Batch actions menu:
+  - Enable/disable multiple sensors
+  - Reset calibration
+  - Update firmware
+  - Assign to room/zone
+
+#### 2.9.2 Sensor Details Screen
+- Header with:
+  - Sensor name (editable)
+  - Sensor type icon
+  - Status indicator (online/offline/error)
+  - Battery level (if applicable)
+  - Signal strength (if wireless)
+- Primary reading visualization:
+  - Large numerical display for primary value
+  - Appropriate visualization (gauge, indicator, graph)
+  - Unit of measurement
+  - Timestamp of last update
+- Historical data graph:
+  - Time-series chart of readings
+  - Time range selector (1h, 24h, 7d, 30d)
+  - Min/max indicators
+  - Trend line
+  - Export data option
+- Secondary readings section:
+  - Additional data points from multi-function sensors
+  - Mini visualizations for each data point
+- Configuration panel:
+  - Sensitivity slider/input
+  - Threshold settings
+  - Update frequency
+  - Calibration controls
+  - Advanced settings expandable section
+- Location assignment:
+  - Room/zone dropdown
+  - "Locate on Floor Plan" button
+- Associated automations list:
+  - Rules using this sensor as trigger
+  - Toggle to enable/disable per rule
+  - "Add Rule" button
+- Maintenance section:
+  - Firmware version and update button
+  - Reset to defaults
+  - Diagnostic test button
+  - Removal process
+
+#### 2.9.3 Add Sensor Screen
+- Sensor discovery section:
+  - Animated scanning visualization
+  - List of discovered sensors with:
+    - Sensor ID/name
+    - Type detection
+    - Signal strength
+    - "Connect" button
+- Manual addition section:
+  - Sensor type selection
+  - ID/serial input
+  - Connection method options
+  - "Add Manually" button
+- Setup wizard with:
+  - Step-by-step progress indicator
+  - Connection status feedback
+  - Location assignment
+  - Naming step
+  - Initial calibration
+  - Testing confirmation
+- Success confirmation with:
+  - Animated checkmark
+  - Sensor details summary
+  - "Configure Now" or "Done" buttons
+
+### 2.10 Automation Rules Screens
+
+#### 2.10.1 Rules List
+- Segmented navigation:
+  - "Active Rules"
+  - "Inactive Rules"
+  - "Templates"
+- For each rule:
+  - Rule name
+  - Brief condition summary
+  - Brief action summary
+  - Enabled/disabled toggle
+  - Status indicator (active/waiting/error)
+- Sorting options:
+  - Recently triggered
+  - Alphabetical
+  - Custom order
+- Filtering options:
+  - By sensor type
+  - By action type
+  - By location
+- "Create Rule" FAB
+- Batch actions menu:
+  - Enable/disable selection
+  - Duplicate
+  - Delete
+
+#### 2.10.2 Rule Creation/Editor
+- Rule name input
+- Trigger section:
+  - "When" statement builder
+  - Sensor selection with search
+  - Condition options (specific to sensor type)
+  - Value thresholds with sliders/inputs
+  - Time condition options
+  - Multiple condition support (AND/OR logic)
+  - Condition preview in natural language
+- Action section:
+  - "Then" statement builder
+  - Action type selection (change LEDs, activate pattern, etc.)
+  - Target LightBox selection
+  - Action parameters (specific to action type)
+  - Transition settings (fade time, delay)
+  - Multiple action sequence support
+  - Action preview visualization
+- Advanced options:
+  - Repeat behavior settings
+  - Cooldown period
+  - Priority level
+  - Notification settings
+- Test functionality:
+  - "Test Rule" button
+  - Real-time feedback
+  - Success/failure indication
+- Save/cancel buttons
+- "Delete Rule" option (for existing rules)
+
+#### 2.10.3 Rule Templates
+- Grid of pre-defined rule templates:
+  - Motion-activated lighting
+  - Occupancy timeout
+  - Environmental response
+  - Sound-reactive effects
+  - Security alerts
+- For each template:
+  - Illustrative icon
+  - Template name
+  - Brief description
+  - Complexity indicator
+  - "Use Template" button
+- Customization view:
+  - Pre-filled rule editor
+  - Highlighted customization points
+  - Guide text for adaptations
+  - "Save as Custom Rule" button
+
 ## 3. User Flows
 
 ### 3.1 First-Time User Experience
@@ -452,6 +620,41 @@
 7. User saves layout with name
 8. User can apply visualized pattern to actual LightBox
 
+### 3.6 Sensor Integration Flow
+
+1. User navigates to Sensors Dashboard
+2. User taps "Add Sensor" button
+3. Discovery screen scans for available sensors
+4. User selects sensor from discovered list or adds manually
+5. Step-by-step setup guides through connection process
+6. User assigns sensor to a room/location
+7. User names the sensor and configures basic settings
+8. Initial calibration process runs if needed
+9. Success confirmation shows sensor is ready
+10. User is returned to updated Sensors Dashboard
+
+### 3.7 Automation Rule Creation Flow
+
+1. User navigates to Automation Rules screen
+2. User taps "Create Rule" button
+3. User enters rule name
+4. User builds trigger condition:
+   - Selects sensor from list
+   - Configures condition parameters
+   - Adds any time constraints
+   - Adds additional conditions if needed
+5. User builds action sequence:
+   - Selects action type
+   - Chooses target devices
+   - Configures specific parameters
+   - Adds transitions or delays
+   - Adds additional actions if needed
+6. User configures advanced options
+7. User tests rule functionality
+8. User saves rule
+9. New rule appears in rules list
+10. System begins monitoring for trigger conditions
+
 ## 4. Interaction Specifications
 
 ### 4.1 LED Matrix Interactions
@@ -505,6 +708,31 @@
 - Tap and drag for selection or movement
 - Two-finger gestures for view manipulation
 
+### 4.7 Sensor Interaction Patterns
+
+- **Tap Sensor Card**: Open detailed sensor view
+- **Long Press Sensor Card**: Show quick action menu
+- **Swipe Sensor Card Left**: Quick disable
+- **Swipe Sensor Card Right**: Quick recalibrate
+- **Pull Down**: Refresh sensor data
+- **Tap Graph**: Show specific data point values
+- **Pinch Graph**: Zoom time scale
+- **Two-finger Drag Graph**: Pan through time periods
+- **Tap Settings Icon**: Open sensor configuration
+- **Tap Alert Icon**: Show alert details and resolution options
+
+### 4.8 Automation Rule Interactions
+
+- **Tap Rule**: Open rule details/editor
+- **Tap Toggle**: Enable/disable rule
+- **Swipe Rule Left**: Delete rule (with confirmation)
+- **Long Press Rule**: Show quick action menu
+- **Drag Handle**: Reorder rules (priority)
+- **Tap Condition Block**: Expand/edit condition
+- **Tap Action Block**: Expand/edit action
+- **Tap + Button**: Add condition or action
+- **Drag Between Blocks**: Reorder actions in sequence
+
 ## 5. Visual Design Guidelines
 
 ### 5.1 Color Palette
@@ -524,6 +752,12 @@
   - Secondary text: #757575 (Medium Gray)
   - Disabled text: #9E9E9E (Light Gray)
   - Light theme contrast text: #FFFFFF (White)
+- **Sensor Status Colors**:
+  - Normal: #4CAF50 (Green)
+  - Warning: #FF9800 (Orange)
+  - Critical: #F44336 (Red)
+  - Inactive: #9E9E9E (Gray)
+  - Calibrating: #8C9EFF (Light Purple)
 
 ### 5.2 Typography
 
@@ -614,6 +848,14 @@
 - Icon colors follow color palette
 - Use outlined style for general UI
 - Use filled style for active/selected states
+- **Sensor Type Icons**:
+  - Motion sensor: Person walking icon
+  - Temperature sensor: Thermometer icon
+  - Humidity sensor: Water droplet icon
+  - Light sensor: Sun/brightness icon
+  - Air quality sensor: Air flow icon
+  - Sound sensor: Sound wave icon
+  - Contact sensor: Door/window icon
 
 ### 5.5 Layout Guidelines
 
@@ -740,8 +982,7 @@
 - App cold start: Under 2 seconds
 - Screen transitions: Under 300ms
 - LED state updates: Under 100ms local, under 500ms remote
-- Pattern application: Under
- 200ms
+- Pattern application: Under 200ms
 - Animation playback: 60fps minimum
 
 ### 8.2 Responsiveness Standards
@@ -765,45 +1006,11 @@
 - Appropriate refresh rates for UI updates
 - Power-saving mode support
 
-## 9. Implementation Guidelines
+### 8.5 Sensor Responsiveness
 
-### 9.1 Flutter Implementation
-
-- Use Material Design 3 components
-- Implement responsive layouts with:
-  - LayoutBuilder
-  - MediaQuery
-  - Flex widgets (Row, Column)
-- State management using Provider or Bloc pattern
-- Animation framework for smooth transitions
-- Custom painting for LED matrix visualization
-- Platform channel implementation for native Bluetooth/WiFi functionality
-
-### 9.2 Asset Requirements
-
-- App icon in multiple resolutions
-- Splash screen image
-- Onboarding illustrations
-- Empty state illustrations
-- Navigation icons
-- Action icons
-- Success/error/warning icons
-- Pattern thumbnail placeholder
-- LightBox device illustrations
-
-### 9.3 Code Organization
-
-- Feature-based folder structure
-- Separation of UI and business logic
-- Reusable component library
-- Consistent naming conventions
-- Documentation for complex widgets
-- Accessibility annotations
-
-### 9.4 Testing Requirements
-
-- Unit tests for business logic
-- Widget tests for UI components
-- Integration tests for user flows
-- Device compatibility testing
-- Performance benchmarking
+- Sensor data refresh: Under 5 seconds for dashboard
+- Data graph loading: Under 2 seconds for 24h of data
+- Sensor command execution: Under 1 second
+- Rule trigger to action: Under 500ms for local rules
+- Historical data query: Under 3 seconds for 30 days of data
+- Multiple sensor aggregation: Under 2 seconds for dashboard view
