@@ -1,14 +1,10 @@
 # LED Matrix Control System
-## Backend Architecture Analysis and Recommendations
 
-**Date:** March 9, 2025  
-**Version:** 1.0
 
 ---
 
 ## 1. Executive Summary
 
-This document provides a comprehensive analysis of backend architecture options for the LED Matrix Control System, which requires both online and offline operation, Bluetooth/WiFi connectivity, and supports real-time control through MQTT. Based on the requirements analysis, a **hybrid architecture** combining local processing on the LightBox with cloud synchronization is recommended as the optimal approach for balancing functionality, cost, and scalability.
 
 ---
 
@@ -44,23 +40,6 @@ From the PRD, three deployment models were identified:
 - AWS S3 for file and firmware storage
 - EMQX MQTT broker hosted on EC2
 
-**Advantages:**
-- Full-featured cloud infrastructure
-- Excellent scalability
-- Managed services reduce operational overhead
-- Built-in monitoring and analytics
-
-**Disadvantages:**
-- High dependency on internet connectivity
-- Higher costs at scale
-- Latency for direct device control
-- Complexity for a system requiring offline operation
-
-**Monthly Cost Estimates:**
-- Small Scale (100 devices): $110-130
-- Medium Scale (1,000 devices): $270-310
-- Large Scale (10,000 devices): $1,000-1,200
-
 ### 3.2 Hybrid Approach (Recommended)
 
 **Architecture:**
@@ -87,88 +66,13 @@ From the PRD, three deployment models were identified:
 - Medium Scale (1,000 devices): $140-160
 - Large Scale (10,000 devices): $500-600
 
-### 3.3 Self-Hosted Solution
-
-**Architecture:**
-- Docker containers on LightBox for modular deployment
-- Self-hosted databases and MQTT brokers
-- VPN for remote access
-- Custom storage solution
-
-**Advantages:**
-- Complete control over infrastructure
-- No dependency on cloud providers
-- Potentially lower ongoing costs
-
-**Disadvantages:**
-- Higher development and maintenance complexity
-- Requires DevOps expertise
-- Challenging to scale
-- Higher operational burden
-
-**Monthly Cost Estimates:**
-- Small Scale (100 devices): $50-70
-- Medium Scale (1,000 devices): $200-250
-- Large Scale (10,000 devices): $1,000-1,200
-- Additional DevOps costs: $200-1,000/month
-
-### 3.4 Firebase + Edge Computing
-
-**Architecture:**
-- Firebase for user management, authentication
-- Firebase Realtime Database for cloud synchronization
-- Local server on LightBox for offline operation
-
-**Advantages:**
-- Simpler setup than full AWS
-- Good offline support
-- Lower cost for small-medium scale
-
-**Disadvantages:**
-- Less flexible than full AWS stack for large deployments
-- Limited customization of backend services
-
-**Monthly Cost Estimates:**
-- Small Scale (100 devices): $30-50
-- Medium Scale (1,000 devices): $150-190
-- Large Scale (10,000 devices): $700-800
-
-### 3.5 IoT-Specific Platforms
-
-**Architecture:**
-- AWS IoT Core or similar IoT platform
-- Purpose-built IoT services
-- Edge runtime optimized for IoT devices
-
-**Advantages:**
-- Purpose-built for IoT scenarios
-- Better scaling for IoT workloads
-- Specialized features for device management
-
-**Disadvantages:**
-- Potential vendor lock-in
-- Can be expensive at large scale
-- May require platform-specific knowledge
-
-**Monthly Cost Estimates:**
-- Small Scale (100 devices): $40-50
-- Medium Scale (1,000 devices): $230-270
-- Large Scale (10,000 devices): $1,800-2,000
-
 ---
 
 ## 4. Recommended Architecture: Hybrid Approach
 
-After analyzing the requirements and options, the **hybrid approach** is recommended as the optimal solution for the LED Matrix Control System.
 
 ### 4.1 Architecture Components
 
-#### 4.1.1 LightBox Components (Edge Computing)
-- **Lightweight Local Server:** Node.js with Express (minimized version)
-- **Local Database:** SQLite for local state persistence
-- **Local MQTT Broker:** Mosquitto (lightweight alternative to EMQX)
-- **Firmware Manager:** Handles updates from S3
-- **LED Matrix Controller:** Direct hardware interface
 
 #### 4.1.2 Cloud Components (AWS)
 - **EC2 Instances:** Node.js with Express for remote access and administration
