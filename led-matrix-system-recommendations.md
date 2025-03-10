@@ -31,14 +31,6 @@ From the PRD, three deployment models were identified:
 
 ## 3. Architecture Approaches
 
-### 3.1 AWS Full Cloud Approach
-
-**Architecture:**
-- AWS EC2 for application logic
-- AWS RDS for PostgreSQL database
-- AWS ElastiCache for Redis
-- AWS S3 for file and firmware storage
-- EMQX MQTT broker hosted on EC2
 
 ### 3.2 Hybrid Approach (Recommended)
 
