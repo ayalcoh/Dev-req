@@ -1,20 +1,20 @@
 
-Device Discovery
+## Device Discovery
 
-Function: The system must scan for and discover compatible Lucezzo LED controllers via WiFi, Bluetooth, or direct connection.
-Logic:
 
+## Function: The system must scan for and discover compatible Lucezzo LED controllers via WiFi, Bluetooth, or direct connection.
+
+## Logic:
 Upon scanning initiation, the app broadcasts discovery requests using available protocols.
 Controllers respond with their identifiers, capabilities, and connection status.
 The app verifies compatibility and adds responsive devices to the discovered list.
 
 
-UI/UX:
-
-Clear scanning indicator with progress animation
-Automatic categorization of discovered devices
-Visual feedback for successful/failed connections
-Ability to retry failed connections
+## UI/UX:
+- Clear scanning indicator with progress animation
+- Automatic categorization of discovered devices
+- Visual feedback for successful/failed connections
+- Ability to retry failed connections
 
 
 
