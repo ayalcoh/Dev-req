@@ -162,8 +162,9 @@
   - Displays for 2 seconds
   - Transitions automatically to Login screen
 
-![Splash Screen](images/splash_screen.png)
-*Figure 1: Splash Screen displaying the Lucezzo logo and branding*
+ ![image](https://github.com/user-attachments/assets/c898a22b-d03d-43c5-b379-267fd79fa3b3)
+
+
 
 #### 2.2.2 Login Screen
 - **Purpose**: Authenticate users to the system
@@ -178,8 +179,11 @@
   - Displays errors inline
   - Transitions to Home screen on successful login
 
-![Login Screen](images/login_screen.png)
-*Figure 2: Login Screen with password and biometric options*
+  ![image](https://github.com/user-attachments/assets/4d8af668-8605-4411-883a-d9f3e3d4beb0)  ![image](https://github.com/user-attachments/assets/ee5999e1-68cd-46de-8d4d-f1a254894f41)
+
+
+
+
 
 #### 2.2.3 Home Screen
 - **Purpose**: Provide overview of connected devices and quick access
@@ -193,8 +197,11 @@
   - Allows filtering by device category
   - Provides quick access to device details
 
-![Home Screen](images/home_screen.png)
-*Figure 3: Home Screen showing connected devices and categories*
+
+<img src="https://github.com/user-attachments/assets/02fa53b9-05fa-40cf-9f01-68c220121d9e">
+<br>
+<img src="https://github.com/user-attachments/assets/5107c328-a2cd-40d6-be67-130ac309c25f">
+
 
 #### 2.2.4 Device List Screen
 - **Purpose**: Display all devices with filtering capabilities
@@ -208,8 +215,11 @@
   - Search queries filter by name, type, and room
   - Device status updates in real-time
 
-![Device List Screen](images/device_list_screen.png)
-*Figure 4: Device List Screen with filtering options*
+![image](https://github.com/user-attachments/assets/e852d825-70ab-499e-be64-804b74e15a52)
+<br>
+![image](https://github.com/user-attachments/assets/90ff9b64-730d-47ea-bcbd-569007cef385)
+
+
 
 #### 2.2.5 Add Device Screen
 - **Purpose**: Guide users through connecting new devices
@@ -223,8 +233,12 @@
   - Validates each step before proceeding
   - Confirms successful device addition
 
-![Add Device Screen](images/add_device_screen.png)
-*Figure 5: Add Device Screen with connection options*
+![image](https://github.com/user-attachments/assets/44225d6a-6b6b-42b7-a223-ef6b433e9ab9)<br>![image](https://github.com/user-attachments/assets/11281d8d-4ede-490d-b416-67ac552e92d1)<br>![image](https://github.com/user-attachments/assets/216d5d56-4702-460a-8e2d-c69abf396ecb)<br>![image](https://github.com/user-attachments/assets/b8645b0d-d718-4254-a49d-8c61e0132e67)
+
+
+
+
+
 
 #### 2.2.6 Device Detail Screen
 - **Purpose**: Provide detailed control of specific devices
@@ -238,8 +252,9 @@
   - Error handling for failed control operations
   - Immediate UI feedback for all interactions
 
-![Device Detail Screen](images/device_detail_screen.png)
-*Figure 6: Device Detail Screen showing device controls*
+![image](https://github.com/user-attachments/assets/94afbc1e-a282-4762-8eab-580917356645)<br>![image](https://github.com/user-attachments/assets/c79b8ad5-6dcb-4f62-9a33-ba3b0afc42a1)
+
+
 
 #### 2.2.7 Scenario Library Screen
 - **Purpose**: Browse and manage lighting scenarios
@@ -253,8 +268,8 @@
   - Confirmation when applying scenarios
   - User-created scenarios marked distinctly
 
-![Scenario Library Screen](images/scenario_library_screen.png)
-*Figure 7: Scenario Library Screen with built-in and custom scenarios*
+![image](https://github.com/user-attachments/assets/47a116bc-f31f-4142-b29e-49067993fc59)
+
 
 #### 2.2.8 Create Scenario Screen
 - **Purpose**: Create or edit custom lighting scenarios
@@ -268,8 +283,10 @@
   - Validation of all input fields
   - Save/update confirmation
 
-![Create Scenario Screen](images/create_scenario_screen.png)
-*Figure 8: Create Scenario Screen with property controls*
+![image](https://github.com/user-attachments/assets/046a4228-941c-40f1-a549-357bf3c82dfb)<br>![image](https://github.com/user-attachments/assets/b38401da-05b8-4103-86dd-d25c5eb072f6)
+
+
+
 
 ### 2.3 User Flow Diagrams
 
