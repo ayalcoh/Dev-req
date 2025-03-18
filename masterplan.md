@@ -5,122 +5,271 @@
 ### 1.1 Authentication System
 
 #### 1.1.1 User Login
-**Description:** The system shall provide secure authentication via password or biometric methods.
-
-**Acceptance Criteria:**
-- Users can log in using password authentication
-- Users can log in using biometric authentication if supported by device
-- Login errors are clearly displayed
-- Authentication persists between app sessions
+- **Description**: The system shall provide secure authentication via password or biometric methods.
+- **Acceptance Criteria**:
+  - Users can log in using password authentication
+  - Users can log in using biometric authentication if supported by device
+  - Login errors are clearly displayed
+  - Authentication persists between app sessions
 
 #### 1.1.2 Session Management
-**Description:** The system shall maintain user sessions securely.
-
-**Acceptance Criteria:**
-- Sessions expire after appropriate timeout
-- Automatic redirection to login when session expires
-- Secure storage of authentication tokens
+- **Description**: The system shall maintain user sessions securely.
+- **Acceptance Criteria**:
+  - Sessions expire after appropriate timeout
+  - Automatic redirection to login when session expires
+  - Secure storage of authentication tokens
 
 ### 1.2 Device Management
 
 #### 1.2.1 Device Discovery
-**Description:** The system shall allow users to discover and connect to Lightbox controllers.
-
-**Acceptance Criteria:**
-- Users can scan for available devices via WiFi
-- Users can select connection method (WiFi, Bluetooth, Direct Connect)
-- Connection status is clearly indicated
-- Error handling for failed connections
+- **Description**: The system shall allow users to discover and connect to Lightbox controllers.
+- **Acceptance Criteria**:
+  - Users can scan for available devices via WiFi
+  - Users can select connection method (WiFi, Bluetooth, Direct Connect)
+  - Connection status is clearly indicated
+  - Error handling for failed connections
 
 #### 1.2.2 Device Configuration
-**Description:** The system shall allow users to configure Lightbox controllers.
-
-**Acceptance Criteria:**
-- Users can name devices
-- Users can assign devices to rooms/categories
-- Users can set auto-connect preferences
-- Users can enable/disable notifications
+- **Description**: The system shall allow users to configure Lightbox controllers.
+- **Acceptance Criteria**:
+  - Users can name devices
+  - Users can assign devices to rooms/categories
+  - Users can set auto-connect preferences
+  - Users can enable/disable notifications
 
 #### 1.2.3 Device Control
-**Description:** The system shall allow users to control Lightbox controllers using standardized TSL properties.
-
-**Acceptance Criteria:**
-- Users can power devices on/off
-- Users can adjust all supported controller parameters
-- Control changes take effect within 1 second
-- Current state is accurately reflected in UI
+- **Description**: The system shall allow users to control Lightbox controllers using standardized TSL properties.
+- **Acceptance Criteria**:
+  - Users can power devices on/off
+  - Users can adjust all supported controller parameters
+  - Control changes take effect within 1 second
+  - Current state is accurately reflected in UI
 
 ### 1.3 TSL Definitions
 
 #### 1.3.1 Lightbox Controller TSL
+
 ```json
 {
   "deviceType": "Controller",
   "properties": [
-    { "identifier": "power", "name": "Power", "dataType": "boolean", "value": false },
-    { "identifier": "mode", "name": "Mode", "dataType": "enum", "value": "Standard", "specs": { "options": ["Standard", "Eco", "Boost", "Auto"] } },
-    { "identifier": "active_scenario", "name": "Active Scenario", "dataType": "enum", "value": "None", "specs": { "options": ["None", "Ocean", "Forest", "Sunshine", "Evening", "Party"], "has_library": true } },
-    { "identifier": "brightness", "name": "Brightness", "dataType": "integer", "value": 50, "specs": { "min": 0.0, "max": 100.0, "step": 1.0 } },
-    { "identifier": "color", "name": "Color", "dataType": "string", "value": "#FFFFFF" },
-    { "identifier": "animation", "name": "Animation", "dataType": "enum", "value": "None", "specs": { "options": ["None", "Wave", "Pulse", "Sway", "Fade"] } },
-    { "identifier": "animation_speed", "name": "Animation Speed", "dataType": "enum", "value": "Medium", "specs": { "options": ["Slow", "Medium", "Fast"] } }
+    {
+      "identifier": "power",
+      "name": "Power",
+      "dataType": "boolean",
+      "value": false
+    },
+    {
+      "identifier": "mode",
+      "name": "Mode",
+      "dataType": "enum",
+      "value": "Standard",
+      "specs": {
+        "options": ["Standard", "Eco", "Boost", "Auto"]
+      }
+    },
+    {
+      "identifier": "active_scenario",
+      "name": "Active Scenario",
+      "dataType": "enum",
+      "value": "None",
+      "specs": {
+        "options": ["None", "Ocean", "Forest", "Sunshine", "Evening", "Party"],
+        "has_library": true
+      }
+    },
+    {
+      "identifier": "brightness",
+      "name": "Brightness",
+      "dataType": "integer",
+      "value": 50,
+      "specs": {"min": 0.0, "max": 100.0, "step": 1.0}
+    },
+    {
+      "identifier": "color",
+      "name": "Color",
+      "dataType": "string",
+      "value": "#FFFFFF"
+    },
+    {
+      "identifier": "animation",
+      "name": "Animation",
+      "dataType": "enum",
+      "value": "None",
+      "specs": {
+        "options": ["None", "Wave", "Pulse", "Sway", "Fade"]
+      }
+    },
+    {
+      "identifier": "animation_speed",
+      "name": "Animation Speed",
+      "dataType": "enum",
+      "value": "Medium",
+      "specs": {
+        "options": ["Slow", "Medium", "Fast"]
+      }
+    }
   ]
 }
 ```
+
+### 1.4 Pattern/Scenario Management
+
+#### 1.4.1 Built-in Patterns
+- **Description**: The system shall provide a library of built-in lighting patterns.
+- **Acceptance Criteria**:
+  - Users can browse built-in patterns
+  - Users can preview patterns before applying
+  - Users can apply patterns to controllers
+  - Pattern application is confirmed to user
+
+#### 1.4.2 Custom Pattern Creation
+- **Description**: The system shall allow users to create and save custom lighting patterns.
+- **Acceptance Criteria**:
+  - Users can create new patterns by adjusting properties
+  - Users can name and describe patterns
+  - Users can save patterns to local storage
+  - Users can edit existing patterns
+
+#### 1.4.3 Pattern Management
+- **Description**: The system shall provide tools to manage saved patterns.
+- **Acceptance Criteria**:
+  - Users can view all saved patterns
+  - Users can delete custom patterns
+  - Users can edit custom patterns
+  - Users can apply patterns to devices
 
 ## 2. User Interface Specifications
 
 ### 2.1 Application Structure
 
 #### 2.1.1 Navigation Model
-The application follows a tab-based navigation model with four main sections:
-- **Home:** Displays connected devices and quick access controls
-- **Devices:** Shows all available devices with detailed filtering
-- **Discover:** For finding and adding new devices
-- **Profile:** User account management
+- The application follows a tab-based navigation model with four main sections:
+  - Home: Displays connected devices and quick access controls
+  - Devices: Shows all available devices with detailed filtering
+  - Discover: For finding and adding new devices
+  - Profile: User account management
 
 ### 2.2 Screen-by-Screen Specifications
 
 #### 2.2.1 Splash Screen
-**Purpose:** Display app branding while initializing the application
+- **Purpose**: Display app branding while initializing the application
+- **Components**:
+  - App logo (Lucezzo logo with white background)
+  - App name in branded typography
+  - Gradient background using app theme colors
+- **Behavior**:
+  - Displays for 2 seconds
+  - Transitions automatically to Login screen
 
-**Components:**
-- App logo (Lucezzo logo with white background)
-- App name in branded typography
-- Gradient background using app theme colors
-
-**Behavior:**
-- Displays for 2 seconds
-- Transitions automatically to Login screen
+![Splash Screen](images/splash_screen.png)
+*Figure 1: Splash Screen displaying the Lucezzo logo and branding*
 
 #### 2.2.2 Login Screen
-**Purpose:** Authenticate users to the system
+- **Purpose**: Authenticate users to the system
+- **Components**:
+  - Welcome message
+  - Login type selector (Password/Biometric)
+  - Username/password fields (for password login)
+  - Biometric prompt (for biometric login)
+  - Login button
+- **Behavior**:
+  - Validates input fields
+  - Displays errors inline
+  - Transitions to Home screen on successful login
 
-**Components:**
-- Welcome message
-- Login type selector (Password/Biometric)
-- Username/password fields (for password login)
-- Biometric prompt (for biometric login)
-- Login button
-
-**Behavior:**
-- Validates input fields
-- Displays errors inline
-- Transitions to Home screen on successful login
+![Login Screen](images/login_screen.png)
+*Figure 2: Login Screen with password and biometric options*
 
 #### 2.2.3 Home Screen
-**Purpose:** Provide overview of connected devices and quick access
+- **Purpose**: Provide overview of connected devices and quick access
+- **Components**:
+  - Header with device count and add device button
+  - Device categories section with icons for filtering
+  - Recently connected devices list with status indicators
+  - Quick control toggles for power status
+- **Behavior**:
+  - Updates device status in real-time
+  - Allows filtering by device category
+  - Provides quick access to device details
 
-**Components:**
-- Header with device count and add device button
-- Device categories section with icons for filtering
-- Recently connected devices list with status indicators
-- Quick control toggles for power status
+![Home Screen](images/home_screen.png)
+*Figure 3: Home Screen showing connected devices and categories*
 
-**Behavior:**
-- Updates device status in real-time
-- Allows filtering by device category
-- Provides quick access to device details
+#### 2.2.4 Device List Screen
+- **Purpose**: Display all devices with filtering capabilities
+- **Components**:
+  - Filter chips for status (All, Online, Offline)
+  - Search bar for finding specific devices
+  - Device cards with status and quick controls
+  - Device count indicator
+- **Behavior**:
+  - Filters update list immediately
+  - Search queries filter by name, type, and room
+  - Device status updates in real-time
+
+![Device List Screen](images/device_list_screen.png)
+*Figure 4: Device List Screen with filtering options*
+
+#### 2.2.5 Add Device Screen
+- **Purpose**: Guide users through connecting new devices
+- **Components**:
+  - Step indicator showing current progress
+  - Connection method selection (WiFi, Bluetooth, Direct)
+  - Device scanning interface
+  - Device configuration form
+- **Behavior**:
+  - Progresses through steps sequentially
+  - Validates each step before proceeding
+  - Confirms successful device addition
+
+![Add Device Screen](images/add_device_screen.png)
+*Figure 5: Add Device Screen with connection options*
+
+#### 2.2.6 Device Detail Screen
+- **Purpose**: Provide detailed control of specific devices
+- **Components**:
+  - Device header with icon, name, and power toggle
+  - Information section with device metadata
+  - Controls section with TSL-based property controls
+  - History section showing recent activities
+- **Behavior**:
+  - Controls update device state in real-time
+  - Error handling for failed control operations
+  - Immediate UI feedback for all interactions
+
+![Device Detail Screen](images/device_detail_screen.png)
+*Figure 6: Device Detail Screen showing device controls*
+
+#### 2.2.7 Scenario Library Screen
+- **Purpose**: Browse and manage lighting scenarios
+- **Components**:
+  - Tab navigation between built-in and custom scenarios
+  - Scenario grid with visual previews
+  - Scenario details with name and description
+  - Actions for applying, editing, or deleting scenarios
+- **Behavior**:
+  - Preview updates when selecting different scenarios
+  - Confirmation when applying scenarios
+  - User-created scenarios marked distinctly
+
+![Scenario Library Screen](images/scenario_library_screen.png)
+*Figure 7: Scenario Library Screen with built-in and custom scenarios*
+
+#### 2.2.8 Create Scenario Screen
+- **Purpose**: Create or edit custom lighting scenarios
+- **Components**:
+  - Scenario preview with real-time updates
+  - Name and description input fields
+  - Color selector with hex input
+  - Property controls (brightness, animation, speed)
+- **Behavior**:
+  - Preview updates as changes are made
+  - Validation of all input fields
+  - Save/update confirmation
+
+![Create Scenario Screen](images/create_scenario_screen.png)
+*Figure 8: Create Scenario Screen with property controls*
 
 ### 2.3 User Flow Diagrams
 
@@ -158,39 +307,88 @@ Device Detail Screen → Scenario Button → Scenario Library → [Select Built-
 ### 3.1 Pattern Sources
 
 #### 3.1.1 Built-in Patterns
-**Description:** The system includes a set of predefined patterns that cannot be modified.
-
-**Requirements:**
-- Minimum of 5 built-in patterns (Ocean, Forest, Sunshine, Evening, Party)
-- Each pattern includes preset values for color, brightness, animation, and speed
-- Patterns are categorized by mood/theme
-- All built-in patterns are available offline
+- **Description**: The system includes a set of predefined patterns that cannot be modified.
+- **Requirements**:
+  - Minimum of 5 built-in patterns (Ocean, Forest, Sunshine, Evening, Party)
+  - Each pattern includes preset values for color, brightness, animation, and speed
+  - Patterns are categorized by mood/theme
+  - All built-in patterns are available offline
 
 #### 3.1.2 User-Created Patterns
-**Description:** Users can create, save, and manage their own custom patterns.
+- **Description**: Users can create, save, and manage their own custom patterns.
+- **Requirements**:
+  - Users can save unlimited custom patterns
+  - Custom patterns are stored locally on device
+  - Custom patterns can be modified or deleted by the user
+  - Custom patterns persist across app sessions
 
-**Requirements:**
-- Users can save unlimited custom patterns
-- Custom patterns are stored locally on device
-- Custom patterns can be modified or deleted by the user
-- Custom patterns persist across app sessions
+### 3.2 Pattern Management
+
+#### 3.2.1 Pattern Creation
+- **Description**: Users can create new custom patterns from scratch or by modifying existing ones.
+- **Requirements**:
+  - Creation interface allows setting all controller properties
+  - Real-time preview of pattern effect
+  - Required fields include name and at least one property setting
+  - Validation prevents saving invalid patterns
+
+#### 3.2.2 Pattern Editing
+- **Description**: Users can modify saved custom patterns.
+- **Requirements**:
+  - Edit interface pre-populated with current pattern settings
+  - Changes can be saved or discarded
+  - Confirmation required for major changes
+  - Original pattern preserved until save is confirmed
+
+#### 3.2.3 Pattern Deletion
+- **Description**: Users can remove custom patterns from their library.
+- **Requirements**:
+  - Deletion requires confirmation
+  - Deleted patterns cannot be recovered
+  - Currently active pattern cannot be deleted
+  - System provides feedback after successful deletion
+
+#### 3.2.4 Pattern Application
+- **Description**: Users can apply patterns to connected controllers.
+- **Requirements**:
+  - Pattern can be applied with a single tap
+  - Application confirmation is displayed
+  - Error handling for failed application
+  - Applied pattern is highlighted in the interface
 
 ### 3.3 Pattern Data Structure
+
+#### 3.3.1 Pattern Model
 ```json
 {
-  "id": "string",
-  "name": "string",
-  "description": "string",
-  "imageUrl": "string",
+  "id": "string", // Unique identifier (UUID)
+  "name": "string", // User-friendly name
+  "description": "string", // Optional description
+  "imageUrl": "string", // Reference to preview image
   "settings": {
-    "color": "string",
-    "brightness": "integer",
-    "animation": "string",
-    "animation_speed": "string"
+    "color": "string", // Hex color code
+    "brightness": "integer", // 0-100 value
+    "animation": "string", // Animation type
+    "animation_speed": "string" // Speed setting
   },
-  "isUserCreated": "boolean",
-  "createdAt": "datetime"
+  "isUserCreated": "boolean", // Flag for custom patterns
+  "createdAt": "datetime" // Creation timestamp
 }
 ```
 
-This document outlines the functional and UI/UX requirements for the Lucezzo LED Matrix Control System.
+#### 3.3.2 Storage Requirements
+- **Local Storage**:
+  - Custom patterns stored in SharedPreferences
+  - JSON serialization for pattern data
+  - Efficient loading and saving mechanisms
+  - Error handling for storage failures
+
+#### 3.3.3 Pattern Library Organization
+- **Description**: Patterns are organized for easy browsing and selection.
+- **Requirements**:
+  - Tabs separate built-in from custom patterns
+  - Grid layout with visual previews
+  - Sort options by name, date created, and usage
+  - Empty state handling for no custom patterns
+
+This document defines the functional requirements and user flows for the Lucezzo LED Matrix Control System, focusing exclusively on the Lightbox controller functionality. All specifications are final and comprehensive, ready for implementation by the development team. No sensor or LED light functions are included as these will not be in the initial release.
